@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <div class="container">
+            <div id="surveyDiv" class="container justify-content-center border border-dark ">
+                
+                    <div class="container d-flex justify-content-center" id="surveyHeading">
+                        <h1> Take the survey to find your match </h1>
+                    </div>
+<br>
+                    <!--This div below holds the form-->
+                    <div class="container" id="formDiv">
+                        <!--It is best practice to include the action and method attributes when working with form elements-->
+                        <!--The action attribute points to the URL that the method attribute is interacting with-->
+                        <form action=# method="post">
+
+                            <div>
+                                <label><p>Name (required):
+                                <input id="friendName"type="text" name="personName" minlength="1" maxlength="55" />
+                                </p> </label>
+                            </div>
+
+                            <div>
+                                <label><p> Photo (required):
+                                    <input id="picLink"type= "text" name="pic"/>
+                                </p> </label>
+                            </div>
+
+                            <div class="form-group">
+                                    <label for="ques1">Example select</label>
+                                    <select class="form-control" id="a1">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                    <label for="ques2">Example select</label>
+                                    <select class="form-control" id="a2">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                    </select>
+                            </div>
+                            <!-- <div class="form-group">
+                                    <label for="ques3">Example select</label>
+                                    <select class="form-control" id="a3">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                    <label for="ques4">Example select</label>
+                                    <select class="form-control" id="a4">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                    <label for="ques5">Example select</label>
+                                    <select class="form-control" id="a5">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                    </select>
+                            </div> -->
+                          
+
+                            <button id="submitBTN" type="submit" class="btn btn-primary submit">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+
+
+            </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery.js"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  
+    <!--This script below will trigger a POST request via an on-click-->
+<script type="text/javascript">
+
+  $("#submitBTN").on("click", function(event){
+   
+    event.preventDefault();
+
+      let a1 = parseInt($("#a1").val())
+      let a2 = parseInt($("#a2").val())
+
+
+     var newFriend = {
+        name: $("#friendName").val().trim(),
+        photo: $("#picLink").val().trim(),
+        scores: [ a1, a2]
+      };
+
+      console.log(newFriend);
+
+
+      $.post("/friends", newFriend,
+        function(data) {
+
+console.log(`this is the data obj:   ${data}`)
+
+          if (data) {
+            alert("Your info has been submitted");
+          }
+
+          else {
+            alert("Please submit info again");
+          }
+
+
+        });
+
+
+  })
+
+</script>
+  
+  </body>
+</html>
